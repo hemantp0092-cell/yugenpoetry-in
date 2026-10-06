@@ -10,33 +10,141 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as CategorySlugRouteImport } from './routes/category.$slug'
+import { Route as CollectionsIndexRouteImport } from './routes/collections.index'
+import { Route as CollectionsSlugRouteImport } from './routes/collections.$slug'
+import { Route as ShayariIndexRouteImport } from './routes/shayari.index'
+import { Route as ShayariSlugRouteImport } from './routes/shayari.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategorySlugRoute = CategorySlugRouteImport.update({
+  id: '/category/$slug',
+  path: '/category/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollectionsIndexRoute = CollectionsIndexRouteImport.update({
+  id: '/collections/',
+  path: '/collections/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollectionsSlugRoute = CollectionsSlugRouteImport.update({
+  id: '/collections/$slug',
+  path: '/collections/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShayariIndexRoute = ShayariIndexRouteImport.update({
+  id: '/shayari/',
+  path: '/shayari/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShayariSlugRoute = ShayariSlugRouteImport.update({
+  id: '/shayari/$slug',
+  path: '/shayari/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/search': typeof SearchRoute
+  '/category/$slug': typeof CategorySlugRoute
+  '/collections/$slug': typeof CollectionsSlugRoute
+  '/shayari/$slug': typeof ShayariSlugRoute
+  '/collections/': typeof CollectionsIndexRoute
+  '/shayari/': typeof ShayariIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/search': typeof SearchRoute
+  '/category/$slug': typeof CategorySlugRoute
+  '/collections/$slug': typeof CollectionsSlugRoute
+  '/shayari/$slug': typeof ShayariSlugRoute
+  '/collections': typeof CollectionsIndexRoute
+  '/shayari': typeof ShayariIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/search': typeof SearchRoute
+  '/category/$slug': typeof CategorySlugRoute
+  '/collections/$slug': typeof CollectionsSlugRoute
+  '/shayari/$slug': typeof ShayariSlugRoute
+  '/collections/': typeof CollectionsIndexRoute
+  '/shayari/': typeof ShayariIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/search'
+    | '/category/$slug'
+    | '/collections/$slug'
+    | '/shayari/$slug'
+    | '/collections/'
+    | '/shayari/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/search'
+    | '/category/$slug'
+    | '/collections/$slug'
+    | '/shayari/$slug'
+    | '/collections'
+    | '/shayari'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/search'
+    | '/category/$slug'
+    | '/collections/$slug'
+    | '/shayari/$slug'
+    | '/collections/'
+    | '/shayari/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  SearchRoute: typeof SearchRoute
+  CategorySlugRoute: typeof CategorySlugRoute
+  CollectionsSlugRoute: typeof CollectionsSlugRoute
+  ShayariSlugRoute: typeof ShayariSlugRoute
+  CollectionsIndexRoute: typeof CollectionsIndexRoute
+  ShayariIndexRoute: typeof ShayariIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +156,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/category/$slug': {
+      id: '/category/$slug'
+      path: '/category/$slug'
+      fullPath: '/category/$slug'
+      preLoaderRoute: typeof CategorySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections/': {
+      id: '/collections/'
+      path: '/collections'
+      fullPath: '/collections/'
+      preLoaderRoute: typeof CollectionsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections/$slug': {
+      id: '/collections/$slug'
+      path: '/collections/$slug'
+      fullPath: '/collections/$slug'
+      preLoaderRoute: typeof CollectionsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shayari/': {
+      id: '/shayari/'
+      path: '/shayari'
+      fullPath: '/shayari/'
+      preLoaderRoute: typeof ShayariIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shayari/$slug': {
+      id: '/shayari/$slug'
+      path: '/shayari/$slug'
+      fullPath: '/shayari/$slug'
+      preLoaderRoute: typeof ShayariSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  SearchRoute: SearchRoute,
+  CategorySlugRoute: CategorySlugRoute,
+  CollectionsSlugRoute: CollectionsSlugRoute,
+  ShayariSlugRoute: ShayariSlugRoute,
+  CollectionsIndexRoute: CollectionsIndexRoute,
+  ShayariIndexRoute: ShayariIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
