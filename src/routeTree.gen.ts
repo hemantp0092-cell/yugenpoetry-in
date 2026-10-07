@@ -13,11 +13,20 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as SearchRouteImport } from './routes/search'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminCategoriesRouteImport } from './routes/admin.categories'
+import { Route as AdminCollectionsRouteImport } from './routes/admin.collections'
+import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
+import { Route as AdminMessagesRouteImport } from './routes/admin.messages'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as CategorySlugRouteImport } from './routes/category.$slug'
 import { Route as CollectionsIndexRouteImport } from './routes/collections.index'
 import { Route as CollectionsSlugRouteImport } from './routes/collections.$slug'
 import { Route as ShayariIndexRouteImport } from './routes/shayari.index'
 import { Route as ShayariSlugRouteImport } from './routes/shayari.$slug'
+import { Route as AdminPostsIndexRouteImport } from './routes/admin.posts.index'
+import { Route as AdminPostsNewRouteImport } from './routes/admin.posts.new'
+import { Route as AdminPostsIdEditRouteImport } from './routes/admin.posts.$id.edit'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -37,6 +46,36 @@ const ContactRoute = ContactRouteImport.update({
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminCategoriesRoute = AdminCategoriesRouteImport.update({
+  id: '/admin/categories',
+  path: '/admin/categories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminCollectionsRoute = AdminCollectionsRouteImport.update({
+  id: '/admin/collections',
+  path: '/admin/collections',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/admin/dashboard',
+  path: '/admin/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminMessagesRoute = AdminMessagesRouteImport.update({
+  id: '/admin/messages',
+  path: '/admin/messages',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/admin/settings',
+  path: '/admin/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CategorySlugRoute = CategorySlugRouteImport.update({
@@ -64,28 +103,61 @@ const ShayariSlugRoute = ShayariSlugRouteImport.update({
   path: '/shayari/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminPostsIndexRoute = AdminPostsIndexRouteImport.update({
+  id: '/admin/posts/',
+  path: '/admin/posts/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminPostsNewRoute = AdminPostsNewRouteImport.update({
+  id: '/admin/posts/new',
+  path: '/admin/posts/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminPostsIdEditRoute = AdminPostsIdEditRouteImport.update({
+  id: '/admin/posts/$id/edit',
+  path: '/admin/posts/$id/edit',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/search': typeof SearchRoute
+  '/admin/categories': typeof AdminCategoriesRoute
+  '/admin/collections': typeof AdminCollectionsRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/messages': typeof AdminMessagesRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/category/$slug': typeof CategorySlugRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/shayari/$slug': typeof ShayariSlugRoute
+  '/admin/': typeof AdminIndexRoute
   '/collections/': typeof CollectionsIndexRoute
   '/shayari/': typeof ShayariIndexRoute
+  '/admin/posts/new': typeof AdminPostsNewRoute
+  '/admin/posts/': typeof AdminPostsIndexRoute
+  '/admin/posts/$id/edit': typeof AdminPostsIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/search': typeof SearchRoute
+  '/admin/categories': typeof AdminCategoriesRoute
+  '/admin/collections': typeof AdminCollectionsRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/messages': typeof AdminMessagesRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/category/$slug': typeof CategorySlugRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/shayari/$slug': typeof ShayariSlugRoute
+  '/admin': typeof AdminIndexRoute
   '/collections': typeof CollectionsIndexRoute
   '/shayari': typeof ShayariIndexRoute
+  '/admin/posts/new': typeof AdminPostsNewRoute
+  '/admin/posts': typeof AdminPostsIndexRoute
+  '/admin/posts/$id/edit': typeof AdminPostsIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -93,11 +165,20 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/search': typeof SearchRoute
+  '/admin/categories': typeof AdminCategoriesRoute
+  '/admin/collections': typeof AdminCollectionsRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/messages': typeof AdminMessagesRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/category/$slug': typeof CategorySlugRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/shayari/$slug': typeof ShayariSlugRoute
+  '/admin/': typeof AdminIndexRoute
   '/collections/': typeof CollectionsIndexRoute
   '/shayari/': typeof ShayariIndexRoute
+  '/admin/posts/new': typeof AdminPostsNewRoute
+  '/admin/posts/': typeof AdminPostsIndexRoute
+  '/admin/posts/$id/edit': typeof AdminPostsIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -106,33 +187,60 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/search'
+    | '/admin/categories'
+    | '/admin/collections'
+    | '/admin/dashboard'
+    | '/admin/messages'
+    | '/admin/settings'
     | '/category/$slug'
     | '/collections/$slug'
     | '/shayari/$slug'
+    | '/admin/'
     | '/collections/'
     | '/shayari/'
+    | '/admin/posts/new'
+    | '/admin/posts/'
+    | '/admin/posts/$id/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/contact'
     | '/search'
+    | '/admin/categories'
+    | '/admin/collections'
+    | '/admin/dashboard'
+    | '/admin/messages'
+    | '/admin/settings'
     | '/category/$slug'
     | '/collections/$slug'
     | '/shayari/$slug'
+    | '/admin'
     | '/collections'
     | '/shayari'
+    | '/admin/posts/new'
+    | '/admin/posts'
+    | '/admin/posts/$id/edit'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/contact'
     | '/search'
+    | '/admin/categories'
+    | '/admin/collections'
+    | '/admin/dashboard'
+    | '/admin/messages'
+    | '/admin/settings'
     | '/category/$slug'
     | '/collections/$slug'
     | '/shayari/$slug'
+    | '/admin/'
     | '/collections/'
     | '/shayari/'
+    | '/admin/posts/new'
+    | '/admin/posts/'
+    | '/admin/posts/$id/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -140,11 +248,20 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   SearchRoute: typeof SearchRoute
+  AdminCategoriesRoute: typeof AdminCategoriesRoute
+  AdminCollectionsRoute: typeof AdminCollectionsRoute
+  AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminMessagesRoute: typeof AdminMessagesRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
   CategorySlugRoute: typeof CategorySlugRoute
   CollectionsSlugRoute: typeof CollectionsSlugRoute
   ShayariSlugRoute: typeof ShayariSlugRoute
+  AdminIndexRoute: typeof AdminIndexRoute
   CollectionsIndexRoute: typeof CollectionsIndexRoute
   ShayariIndexRoute: typeof ShayariIndexRoute
+  AdminPostsNewRoute: typeof AdminPostsNewRoute
+  AdminPostsIndexRoute: typeof AdminPostsIndexRoute
+  AdminPostsIdEditRoute: typeof AdminPostsIdEditRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -175,6 +292,48 @@ declare module '@tanstack/react-router' {
       path: '/search'
       fullPath: '/search'
       preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/categories': {
+      id: '/admin/categories'
+      path: '/admin/categories'
+      fullPath: '/admin/categories'
+      preLoaderRoute: typeof AdminCategoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/collections': {
+      id: '/admin/collections'
+      path: '/admin/collections'
+      fullPath: '/admin/collections'
+      preLoaderRoute: typeof AdminCollectionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/admin/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/messages': {
+      id: '/admin/messages'
+      path: '/admin/messages'
+      fullPath: '/admin/messages'
+      preLoaderRoute: typeof AdminMessagesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/admin/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/category/$slug': {
@@ -212,6 +371,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShayariSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/posts/': {
+      id: '/admin/posts/'
+      path: '/admin/posts'
+      fullPath: '/admin/posts/'
+      preLoaderRoute: typeof AdminPostsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/posts/new': {
+      id: '/admin/posts/new'
+      path: '/admin/posts/new'
+      fullPath: '/admin/posts/new'
+      preLoaderRoute: typeof AdminPostsNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/posts/$id/edit': {
+      id: '/admin/posts/$id/edit'
+      path: '/admin/posts/$id/edit'
+      fullPath: '/admin/posts/$id/edit'
+      preLoaderRoute: typeof AdminPostsIdEditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -220,11 +400,20 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   SearchRoute: SearchRoute,
+  AdminCategoriesRoute: AdminCategoriesRoute,
+  AdminCollectionsRoute: AdminCollectionsRoute,
+  AdminDashboardRoute: AdminDashboardRoute,
+  AdminMessagesRoute: AdminMessagesRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
   CategorySlugRoute: CategorySlugRoute,
   CollectionsSlugRoute: CollectionsSlugRoute,
   ShayariSlugRoute: ShayariSlugRoute,
+  AdminIndexRoute: AdminIndexRoute,
   CollectionsIndexRoute: CollectionsIndexRoute,
   ShayariIndexRoute: ShayariIndexRoute,
+  AdminPostsNewRoute: AdminPostsNewRoute,
+  AdminPostsIndexRoute: AdminPostsIndexRoute,
+  AdminPostsIdEditRoute: AdminPostsIdEditRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
