@@ -58,7 +58,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
   );
 }
 
-export function PageHeading({ eyebrow, title, sub }: { eyebrow: string; title: string; sub?: string }) {
+export function PageHeading({ eyebrow, title, sub }: { eyebrow: string; title: string; sub?: string | undefined }) {
   return (
     <div className="mx-auto max-w-3xl px-6 pt-20 pb-12 text-center animate-reveal">
       <p className="eyebrow">{eyebrow}</p>

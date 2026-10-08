@@ -21,7 +21,7 @@ export const settingsQuery = queryOptions({
   },
 });
 
-export const postsQuery = (opts: { limit?: number; featured?: boolean; category?: string; collection?: string; mood?: string } = {}) =>
+export const postsQuery = (opts: { limit?: number; featured?: boolean; category?: string | undefined; collection?: string | undefined; mood?: string | undefined } = {}) =>
   queryOptions({
     queryKey: ["posts", opts],
     queryFn: async () => {
