@@ -15,6 +15,13 @@
       "when": 1791312747447,
       "tag": "0001_migration",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791444491126,
+      "tag": "0002_owner_invites_events_media",
+      "breakpoints": true
     }
   ]
 }

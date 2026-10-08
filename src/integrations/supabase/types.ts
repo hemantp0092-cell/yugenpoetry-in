@@ -92,18 +92,86 @@ export type Database = {
         }
         Relationships: []
       }
+      owner_invites: {
+        Row: {
+          created_at: string
+          email: string | null
+          expires_at: string
+          id: string
+          token_hash: string
+          used_at: string | null
+          used_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          expires_at: string
+          id?: string
+          token_hash: string
+          used_at?: string | null
+          used_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          expires_at?: string
+          id?: string
+          token_hash?: string
+          used_at?: string | null
+          used_by?: string | null
+        }
+        Relationships: []
+      }
+      post_events: {
+        Row: {
+          created_at: string
+          day: string
+          id: string
+          kind: string
+          post_id: string
+          visitor_id: string
+        }
+        Insert: {
+          created_at?: string
+          day?: string
+          id?: string
+          kind: string
+          post_id: string
+          visitor_id: string
+        }
+        Update: {
+          created_at?: string
+          day?: string
+          id?: string
+          kind?: string
+          post_id?: string
+          visitor_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_events_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       posts: {
         Row: {
           body: string
           category_id: string | null
           collection_id: string | null
+          content_type: string
           cover_url: string | null
           created_at: string
+          description: string | null
           excerpt: string | null
           featured: boolean
           id: string
           language: string
           likes: number
+          media: Json
           media_type: string | null
           media_url: string | null
           mood: string | null
@@ -119,13 +187,16 @@ export type Database = {
           body?: string
           category_id?: string | null
           collection_id?: string | null
+          content_type?: string
           cover_url?: string | null
           created_at?: string
+          description?: string | null
           excerpt?: string | null
           featured?: boolean
           id?: string
           language?: string
           likes?: number
+          media?: Json
           media_type?: string | null
           media_url?: string | null
           mood?: string | null
@@ -133,7 +204,7 @@ export type Database = {
           slug: string
           status?: Database["public"]["Enums"]["post_status"]
           tags?: string[]
-          title: string
+          title?: string
           updated_at?: string
           views?: number
         }
@@ -141,13 +212,16 @@ export type Database = {
           body?: string
           category_id?: string | null
           collection_id?: string | null
+          content_type?: string
           cover_url?: string | null
           created_at?: string
+          description?: string | null
           excerpt?: string | null
           featured?: boolean
           id?: string
           language?: string
           likes?: number
+          media?: Json
           media_type?: string | null
           media_url?: string | null
           mood?: string | null
@@ -232,7 +306,8 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      claim_owner: { Args: never; Returns: boolean }
+      check_owner_invite: { Args: { _token: string }; Returns: boolean }
+      claim_owner: { Args: { _token: string }; Returns: boolean }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -240,9 +315,15 @@ export type Database = {
         }
         Returns: boolean
       }
-      increment_like: { Args: { _slug: string }; Returns: number }
-      increment_view: { Args: { _slug: string }; Returns: undefined }
       owner_exists: { Args: never; Returns: boolean }
+      record_like: {
+        Args: { _slug: string; _visitor: string }
+        Returns: number
+      }
+      record_view: {
+        Args: { _slug: string; _visitor: string }
+        Returns: undefined
+      }
     }
     Enums: {
       app_role: "admin"
