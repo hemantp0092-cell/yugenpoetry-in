@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import { getRequest } from "@tanstack/react-start/server";
 import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
 import type { Database } from "@/integrations/supabase/types";
@@ -29,9 +30,11 @@ export const getPublicPost = createServerFn({ method: "GET" })
       .eq("status", "published")
       .lte("published_at", new Date().toISOString())
       .maybeSingle();
+    let origin = "";
+    try { origin = new URL(getRequest().url).origin; } catch { origin = ""; }
     if (error) {
       console.error(error);
-      return { post: null };
+      return { post: null, origin };
     }
-    return { post };
+    return { post, origin };
   });
