@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as MediaRouteImport } from './routes/media'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminCategoriesRouteImport } from './routes/admin.categories'
@@ -41,6 +43,16 @@ const AboutRoute = AboutRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MediaRoute = MediaRouteImport.update({
+  id: '/media',
+  path: '/media',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SearchRoute = SearchRouteImport.update({
@@ -123,6 +135,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/media': typeof MediaRoute
+  '/privacy': typeof PrivacyRoute
   '/search': typeof SearchRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/collections': typeof AdminCollectionsRoute
@@ -143,6 +157,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/media': typeof MediaRoute
+  '/privacy': typeof PrivacyRoute
   '/search': typeof SearchRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/collections': typeof AdminCollectionsRoute
@@ -164,6 +180,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/media': typeof MediaRoute
+  '/privacy': typeof PrivacyRoute
   '/search': typeof SearchRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/collections': typeof AdminCollectionsRoute
@@ -186,6 +204,8 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/media'
+    | '/privacy'
     | '/search'
     | '/admin/categories'
     | '/admin/collections'
@@ -206,6 +226,8 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/media'
+    | '/privacy'
     | '/search'
     | '/admin/categories'
     | '/admin/collections'
@@ -226,6 +248,8 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/media'
+    | '/privacy'
     | '/search'
     | '/admin/categories'
     | '/admin/collections'
@@ -247,6 +271,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
+  MediaRoute: typeof MediaRoute
+  PrivacyRoute: typeof PrivacyRoute
   SearchRoute: typeof SearchRoute
   AdminCategoriesRoute: typeof AdminCategoriesRoute
   AdminCollectionsRoute: typeof AdminCollectionsRoute
@@ -285,6 +311,20 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/media': {
+      id: '/media'
+      path: '/media'
+      fullPath: '/media'
+      preLoaderRoute: typeof MediaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/search': {
@@ -399,6 +439,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
+  MediaRoute: MediaRoute,
+  PrivacyRoute: PrivacyRoute,
   SearchRoute: SearchRoute,
   AdminCategoriesRoute: AdminCategoriesRoute,
   AdminCollectionsRoute: AdminCollectionsRoute,
